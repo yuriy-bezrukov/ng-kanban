@@ -1,0 +1,9 @@
+
+
+<app-add-card (newCard)="onAddCard($event)"></app-add-card>
+
+<div class="wrapper">
+  <app-column [data]="_new"></app-column>
+  <app-column [data]="_progress"></app-column>
+  <app-column [data]="_done"></app-column>
+</div>

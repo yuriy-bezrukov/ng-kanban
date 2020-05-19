@@ -18,4 +18,9 @@ export class CardComponent implements OnInit {
 
   myArray;
 
+  onRemoveCard() {
+    // add next to subject
+    // this.cadrListService.state.next
+  }
+
 }

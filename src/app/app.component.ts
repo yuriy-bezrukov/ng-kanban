@@ -23,9 +23,15 @@ export class AppComponent implements OnInit, OnDestroy {
     // });
     // 2
     this.sub = this.cadrListService.state.subscribe(state => {
-      debugger
-      this.data.push(state.card);
-      this.refreshData();
+      if (state.action === 'addCard') {
+        this.data.push(state.card);
+        this.refreshData();
+      }
+      if (state.action === 'removeCard') {
+        this.data = this.data.filter(card => card.text !== state.card.text);
+        this.refreshData();
+      }
+
     });
 
     // this.cadrListService.state.subscribe(state => {

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  hostName: 'site-api-my.com'
+  hostName: 'https://site-api-my.com/'
 };

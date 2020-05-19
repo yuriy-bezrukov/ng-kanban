@@ -9,7 +9,7 @@ import { CardComponent } from './card/card.component';
 import { ReactiveFormsModule, FormsModule }   from '@angular/forms';
 import { AddCardComponent } from './add-card/add-card.component';
 import { CadrListService } from './cadr-list.service';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { CadrListService } from './cadr-list.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    HttpClientModule,
     ReactiveFormsModule, // two-way binding for Input -> [(ngModel)]
     FormsModule, // two-way binding for Input -> [(ngModel)]
   ],

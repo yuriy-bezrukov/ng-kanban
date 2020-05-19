@@ -1,24 +1,40 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CadrListService } from '../cadr-list.service';
 
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',
   styleUrls: ['./add-card.component.css']
 })
-export class AddCardComponent  {
+export class AddCardComponent implements OnInit {
 
   title: string;
   status: string;
 
+  constructor(private cadrListService: CadrListService) { }
+
   @Output() newCard = new EventEmitter();
+
+  ngOnInit() {
+    this.cadrListService.state.subscribe(x => {
+      debugger
+    });
+  }
 
   onAdd() {
     let card = {
-      name: this.title,
+      text: this.title,
       state: this.status
-    };
+    }
+    // 3
+    this.cadrListService.state.next({action: 'addCard', card: card});
+    // this.cadrListService.add({
+    //   text: this.title,
+    //   state: this.status
+    // }).subscribe(res => {
 
-    this.newCard.emit(card);
+    // });
+    // this.newCard.emit(card);
   }
 
 }

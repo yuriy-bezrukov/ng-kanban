@@ -12,7 +12,7 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() name: string;
+  @Input() text: string;
   @Input() date: string;
   @Input() state: string;
 

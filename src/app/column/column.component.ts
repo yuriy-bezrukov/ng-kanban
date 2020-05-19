@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CadrListService } from '../cadr-list.service';
+import { CadrListService, Card } from '../cadr-list.service';
 
 @Component({
   selector: 'app-column',
@@ -11,10 +11,12 @@ export class ColumnComponent implements OnInit {
   constructor(private cadrListService: CadrListService) { }
 
   ngOnInit(): void {
-    this.cadrListService.state.subscribe(state => {
+
+    this.cadrListService.state.subscribe(x => {
       debugger
-    })
+    });
   }
 
-  @Input() data;
+  // @Input() data;
+  @Input() data: Card[];
 }

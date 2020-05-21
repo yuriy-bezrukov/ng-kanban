@@ -14,9 +14,15 @@ let db = {
       id: 0,
       userId: 1,
       state: 'new'
+    },
+    {
+      text: 'some card123123',
+      id: 1,
+      userId: 1,
+      state: 'done'
     }
   ],
-  cardIndex: 1,
+  cardIndex: 2,
   users: [
     { login: 'ivan', id: 1, password: 'qwe' },
     { login: 'nikolay', id: 2, password: 'qwe' },
@@ -48,11 +54,11 @@ app.use('/card', jsonParser, function (req, res) {
       };
 
       db.cards.push(card);
-      res.json({ result: 'success', card: db.card });
+      res.json({ result: 'success', card: card });
       break;
     case 'POST':
       card = db.cards.find(card => card.id === req.body.id).text = req.body.text;
-      res.json({ result: 'success', card: db.card });
+      res.json({ result: 'success', card: card });
       break;
     case 'DELETE':
       db.cards = db.cards.filter(card => card.id !== req.body.id);

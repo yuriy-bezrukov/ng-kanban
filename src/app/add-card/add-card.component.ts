@@ -16,23 +16,12 @@ export class AddCardComponent implements OnInit {
   @Output() newCard = new EventEmitter();
 
   ngOnInit() {
-    this.cadrListService.state.subscribe(x => {
-      debugger
-    });
   }
 
   onAdd() {
-    let card = {
-      text: this.title,
-      state: this.status
-    }
-
-    this.cadrListService.state.next({action: 'addCard', card: card});
-
-    this.cadrListService.add({
-      text: this.title,
-      state: this.status
-    }).subscribe(res => { });
+    this.cadrListService.add({ text: this.title, state: this.status }).subscribe(res => {
+      this.cadrListService.state.next({ action: 'addCard', card: res.card });
+    });
   }
 
 

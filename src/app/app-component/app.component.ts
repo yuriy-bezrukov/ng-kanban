@@ -12,34 +12,33 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private cadrListService: CadrListService, private http: HttpClient) { }
 
-  sub: Subscription;
-
+  sub = new Subscription();
   title = 'kanban';
+
   ngOnInit() {
     this.cadrListService.get().subscribe(res => {
       this.data = res;
       this.refreshData();
     });
     
-    this.sub = this.cadrListService.state.subscribe(state => {
+    this.sub.add(this.cadrListService.state.subscribe(state => {
       if (state.action === 'addCard') {
         this.data.push(state.card);
         this.refreshData();
       }
 
       if (state.action === 'removeCard') {
-        this.data = this.data.filter(card => card.text !== state.card.text);
+        this.data = this.data.filter(card => card.id !== state.card.id);
         this.refreshData();
       }
 
-    });
+    }));
 
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 
   data: Card[] = [];
 
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   refreshData() {
     this._new = this.data.filter(x => x.state === 'new');
     this._progress = this.data.filter(x => x.state === 'progress');
-    this._done;
-
+    this._done = this.data.filter(x => x.state === 'done');;
   }
+
 }

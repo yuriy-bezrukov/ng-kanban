@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
+var cors = require('cors');
+
 const jsonParser = express.json();
 
+app.use(cors());
 app.set('json spaces', 2)
 
 let db = {
@@ -23,24 +26,27 @@ let db = {
 
 function resolveCors(res) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Methods", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 } 
 
 app.use('/card', jsonParser, function (req, res) {
   resolveCors(res);
-  console.log({ alert: 'onRequest', method: req, params: req.params, body: req.body });
   let card;
   switch (req.method) {
     case 'GET':
       res.json(db.cards)
       break;
     case 'PUT':
+      console.log(req.body.userId);
+      console.log( db.users);
       card = {
         text: req.body.text,
+        state: req.body.state,
         id: db.cardIndex++,
-        userId: db.users.find(user => user.login === req.body.user).id
+        userId: db.users.find(user => user.login === req.body.userId).id
       };
+
       db.cards.push(card);
       res.json({ result: 'success', card: db.card });
       break;
@@ -55,7 +61,6 @@ app.use('/card', jsonParser, function (req, res) {
     default:
       console.log('error request', req.method, req.url);
   }
-  console.log('cards: ', db.cards);
 });
 
 app.use('/db', jsonParser, function (req, res) {

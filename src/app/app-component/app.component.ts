@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CadrListService, Card } from './cadr-list.service';
+import { CadrListService, Card } from '../cadr-list.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
@@ -16,17 +16,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   title = 'kanban';
   ngOnInit() {
-    // this.cadrListService.get().subscribe(res => {
-    //   this.data = res;
-    //   debugger
-    //   this.refreshData();
-    // });
-    // 2
+    this.cadrListService.get().subscribe(res => {
+      this.data = res;
+      this.refreshData();
+    });
+    
     this.sub = this.cadrListService.state.subscribe(state => {
       if (state.action === 'addCard') {
         this.data.push(state.card);
         this.refreshData();
       }
+
       if (state.action === 'removeCard') {
         this.data = this.data.filter(card => card.text !== state.card.text);
         this.refreshData();
@@ -34,35 +34,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     });
 
-    // this.cadrListService.state.subscribe(state => {
-    //   debugger;
-    // });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  onAddCard(card) {
-    this.data.push(card);
-    // this.refreshData();
-    debugger
-    this.cadrListService.add(card).subscribe(x => {
-      debugger
-    });
-    //this.cadrListService.state.next(this.data);
-  }
 
   data: Card[] = [];
-  // data: {state: string, name: string}[] = [];
-  // data = [
-  //   {state: 'new', name: 'fewfwef'},
-  //   {state: 'new', name: 'dfbkm'},
-  //   {state: 'progress', name: 'wef'},
-  //   {state: 'progress', name: 'elr;g'},
-  //   {state: 'progress', name: 'eklbmrepomer'},
-  //   {state: 'done', name: 'wefwef'},
-  // ];
 
   _new = [];
   _progress = [];

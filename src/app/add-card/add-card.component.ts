@@ -26,15 +26,14 @@ export class AddCardComponent implements OnInit {
       text: this.title,
       state: this.status
     }
-    // 3
-    this.cadrListService.state.next({action: 'addCard', card: card});
-    // this.cadrListService.add({
-    //   text: this.title,
-    //   state: this.status
-    // }).subscribe(res => {
 
-    // });
-    // this.newCard.emit(card);
+    this.cadrListService.state.next({action: 'addCard', card: card});
+
+    this.cadrListService.add({
+      text: this.title,
+      state: this.status
+    }).subscribe(res => { });
   }
+
 
 }

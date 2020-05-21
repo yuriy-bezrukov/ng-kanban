@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
 
 export interface Card {
+  id?: string;
   text: string;
   state: string;
 }
@@ -13,8 +14,8 @@ export class CadrListService {
 
   constructor(private http: HttpClient) { }
 
-  private endpoint = `${environment.hostName}card`; // localhost:3000/card
-  // 1
+  private endpoint = `${environment.hostName}card`;
+
   state = new Subject<{action: string, card: Card}>();
 
   get() {
@@ -22,7 +23,11 @@ export class CadrListService {
   }
 
   add(card: Card) {
-    return this.http.put(this.endpoint, { text: card.text, userId: 'stepan' });
+    return this.http.put(this.endpoint, { text: card.text, userId: 'ivan', state: card.state });
+  }
+
+  remove(card: Card) {
+    let data: any =  { id: card.id };
+    return this.http.request('delete', this.endpoint, { body: data });
   }
 }
-// MVC 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CadrListService, Card } from '../cadr-list.service';
 
 @Component({
   selector: 'app-card',
@@ -7,20 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cadrListService: CadrListService) { }
 
   ngOnInit(): void {
   }
 
-  @Input() text: string;
-  @Input() date: string;
-  @Input() state: string;
+  @Input() card: Card;
 
-  myArray;
-
-  onRemoveCard() {
+  onRemove() {
     // add next to subject
-    // this.cadrListService.state.next
+    this.cadrListService.state.next({action: 'removeCard', card: this.card});
+    this.cadrListService.remove(this.card).subscribe();
   }
 
 }

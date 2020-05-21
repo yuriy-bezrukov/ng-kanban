@@ -10,13 +10,15 @@ import { ReactiveFormsModule, FormsModule }   from '@angular/forms';
 import { AddCardComponent } from './add-card/add-card.component';
 import { CadrListService } from './cadr-list.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UpdateCardComponent } from './update-card/update-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ColumnComponent,
     CardComponent,
-    AddCardComponent
+    AddCardComponent,
+    UpdateCardComponent
   ],
   imports: [
     BrowserModule,

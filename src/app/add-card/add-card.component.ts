@@ -13,7 +13,7 @@ export class AddCardComponent implements OnInit {
 
   constructor(private cadrListService: CadrListService) { }
 
-  @Output() newCard = new EventEmitter();
+  // @Output() newCard = new EventEmitter();
 
   ngOnInit() {
   }

@@ -1,0 +1,5 @@
+<div class="wrapper" *ngIf="card">
+    <input type="text" [(ngModel)]="card.text" placeholder="title">
+    <input type="text" [(ngModel)]="card.state" placeholder="status">
+    <button (click)="onUpdate()">update card</button>
+</div>

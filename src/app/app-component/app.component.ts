@@ -32,6 +32,13 @@ export class AppComponent implements OnInit, OnDestroy {
         this.refreshData();
       }
 
+      if (state.action === 'updateCard') {
+        let card = this.data.find(card => card.id !== state.card.id);
+        card.state = state.card.state;
+        card.text = state.card.text;
+        this.refreshData();
+      }
+
     }));
 
   }

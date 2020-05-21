@@ -17,8 +17,14 @@ export class CardComponent implements OnInit {
 
   onRemove() {
     this.cadrListService.remove(this.card).subscribe(res => {
-      this.cadrListService.state.next({action: 'removeCard', card: this.card});
+      this.cadrListService.state.next({ action: 'removeCard', card: this.card });
     });
   }
+
+  onUpdate() {
+    this.cadrListService.state.next({ action: 'selectCardToUpdate', card: this.card });
+  }
+
+
 
 }

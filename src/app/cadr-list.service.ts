@@ -34,6 +34,10 @@ export class CadrListService {
     return this.http.put<IResponseCard>(this.endpoint, { text: card.text, userId: 'ivan', state: card.state });
   }
 
+  update(card: Card) {
+    return this.http.post<IResponseCard>(this.endpoint, { card: card });
+  }
+
   remove(card: Card) {
     let data: any = { id: card.id };
     return this.http.request<IResponse>('delete', this.endpoint, { body: data });
